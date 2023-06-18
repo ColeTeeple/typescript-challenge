@@ -1,15 +1,20 @@
 const testStr = "My dog's name is Charlie";
 
-const findFirstNonRepeated = (str: String) => {
-  for (let i = 0; i < str.length; i++) {
-    for (let j = i + 1; j < str.length; j++) {
-      if (str[i].toLowerCase() == str[j].toLowerCase()) {
-        i++;
+const findFirstNonRepeating = (str: string): string => {
+    str = str.toLowerCase();
+    const charCount: { [key: string]: number } = {};
+
+    for (let i = 0; i < str.length; i++) {
+      charCount[str[i]] = (charCount[str[i]] || 0) + 1;
+    }
+
+    for (let i = 0; i < str.length; i++) {
+      if (charCount[str[i]] === 1) {
+        return str[i];
       }
     }
-    return str[i];
+    return "";
   }
-};
 
-const answer = findFirstNonRepeated(testStr);
+const answer = findFirstNonRepeating(testStr);
 console.log(answer);
